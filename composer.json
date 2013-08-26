@@ -1,0 +1,16 @@
+{
+    "name": "nervetattoo/ezjsfun",
+    "description": "eZ JavaScript Fun for eZ Summer Camp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raymond Julin",
+            "homepage": "http://raymondjulin.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {"Nervetattoo\\ezjsfun": "src/"}
+    }
+}
