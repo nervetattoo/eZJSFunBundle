@@ -1,0 +1,8 @@
+system:
+    ezdemo_site_group:
+        location_view:
+            full:
+                galleries:
+                    template: eZJSFunBundle:full:galleries.html.twig
+                    match:
+                        Id\Location: 111

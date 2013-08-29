@@ -1,0 +1,7 @@
+parameters:
+#    e_zjs_fun.example.class: nervetattoo\eZJSFunBundle\Example
+
+services:
+#    e_zjs_fun.example:
+#        class: %e_zjs_fun.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
