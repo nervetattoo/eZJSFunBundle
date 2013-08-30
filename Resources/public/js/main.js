@@ -4,7 +4,8 @@ requirejs.config({
         jquery: "libs/jquery/jquery",
         lodash: "libs/lodash/dist/lodash",
         underscore: "libs/lodash/dist/lodash.backbone",
-        backbone: "libs/backbone/backbone"
+        backbone: "libs/backbone/backbone",
+        ez: "backbone.ez/"
     },
     shim: {
         backbone: {
@@ -15,8 +16,16 @@ requirejs.config({
     urlArgs: 'bust=' + Date.now()
 });
 
-requirejs(['backbone', 'app', 'jquery'], function(Backbone, App, $) {
-    Backbone.urlRoot = 'api/ezp/v2';
+requirejs(['backbone', 'app', 'jquery', 'ez/config'], function(Backbone, App, $, Ez) {
+    // Backbone.ez configuration
+    Ez.set({
+        username: 'admin',
+        password: 'ezsc',
+        prefix: '/api/ezp/v2',
+        _href: function(partial) {
+            return this.get('prefix') + partial;
+        }
+    });
     new App({
         el: $('#app-container')
     }).render();

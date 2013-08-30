@@ -1,4 +1,4 @@
-define(['./content', 'create'], function(Model, create) {
+define(['ez/content/object', 'ez/config', 'create'], function(Model, Ez, create) {
     return Model.extend({
         initialize: function() {
             _.bindAll(this);
@@ -18,10 +18,10 @@ define(['./content', 'create'], function(Model, create) {
                 data: window.btoa(blob)
             });
             var data = create.content({
-                ContentType: {_href: '/api/ezp/v2/content/types/27'},
+                ContentType: {_href: Ez.get('_href', '/content/types/27')},
                 LocationCreate: {
                     ParentLocation : {
-                        _href: '/api/ezp/v2/content/locations/1/2/111'
+                        _href: Ez.get('_href', '/content/locations/1/2/111')
                     }
                 },
                 fields: {
@@ -29,21 +29,19 @@ define(['./content', 'create'], function(Model, create) {
                 }
             });
 
-            return Backbone.ajax({
-                url: _.result(this, 'url'),
-                username: 'admin',
-                password: 'ezsc',
-                dataType: 'json',
-                data: JSON.stringify(data),
-                contentType: 'application/vnd.ez.api.ContentCreate+json',
-                type: 'POST'
-            })
+            return this
+                .contentCreate(data)
                 .done(this.uploadSuccess)
                 .fail(this.uploadError);
         },
 
         uploadSuccess: function(resp) {
-            console.log(resp);
+            this.publish(this.id, this.get('CurrentVersion').Version.VersionInfo.versionNo)
+                .done(this.published);
+        },
+
+        published: function(resp) {
+            console.log('published', resp);
         },
 
         uploadError: function(resp) {
