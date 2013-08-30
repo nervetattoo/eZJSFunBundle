@@ -9,6 +9,12 @@
     {% include 'eZDemoBundle::page_head.html.twig' %}
     {% include 'eZDemoBundle::page_head_style.html.twig' %}
 
+    <style>
+        .hover {
+            border: 1px dashed green; 
+        }
+    </style>
+
     <script src="{{asset('bundles/ezjsfun/js/libs/requirejs/require.js')}}"
         data-main="{{asset('bundles/ezjsfun/js/')}}/main"></script>
 </head>

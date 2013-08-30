@@ -14,3 +14,5 @@ app/config/parameters.yml
 
 # Bower packages
 Resources/public/js/libs/
+
+*.swp
