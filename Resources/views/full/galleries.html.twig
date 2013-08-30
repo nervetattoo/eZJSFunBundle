@@ -9,7 +9,7 @@
     {% include 'eZDemoBundle::page_head.html.twig' %}
     {% include 'eZDemoBundle::page_head_style.html.twig' %}
 
-    <script src="{{asset('bundles/ezjsfun/js/requirejs/require.js')}}"
+    <script src="{{asset('bundles/ezjsfun/js/libs/requirejs/require.js')}}"
         data-main="{{asset('bundles/ezjsfun/js/')}}/main"></script>
 </head>
 <body>
@@ -30,17 +30,7 @@
         {% endif %}
         <!-- Path area: END -->
     </div>
-    <div class="container">
-        <div class="row">
-            {% block content %}
-            <form class="form-inline">
-                <fieldset>
-                    <input class="input-large" type="text" placeholder="Gallery name">
-                    <button class="btn btn-primary">Add</button>
-                </fieldset>
-            </form>
-            {% endblock %}
-        </div>
+    <div class="container" id="app-container">
     </div>
 </div>
 </body>

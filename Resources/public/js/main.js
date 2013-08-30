@@ -1,19 +1,21 @@
 requirejs.config({
     baseUrl: '/bundles/ezjsfun/js',
     paths: {
-        jquery: "js/jquery/jquery.js",
-        lodash: "js/lodash/dist/lodash.compat.js",
-        backbone: "js/backbone",
-        "backbone.localStorage": "js/backbone.localStorage/backbone.localStorage.js",
-        "handlebars.js": "js/handlebars.js/dist/handlebars.js"
+        jquery: "libs/jquery/jquery",
+        underscore: "libs/lodash/dist/lodash.backbone",
+        backbone: "libs/backbone/backbone"
     },
-    map: {
-        '*': {
-            underscore: 'lodash'
+    shim: {
+        backbone: {
+            exports: 'Backbone',
+            deps: ['underscore', 'jquery']
         }
     }
 });
 
-requirejs(['backbone'], function(Backbone) {
+requirejs(['backbone', 'app', 'jquery'], function(Backbone, App, $) {
+    new App({
+        el: $('#app-container')
+    }).render();
     Backbone.history.start();
 });
