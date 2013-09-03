@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'file'], function(_, Backbone, File) {
+define(['underscore', 'backbone', 'models/file'], function(_, Backbone, File) {
     return Backbone.View.extend({
         events: {
             dragover: 'lightUp',
@@ -41,6 +41,7 @@ define(['underscore', 'backbone', 'file'], function(_, Backbone, File) {
                 .html('<h2 class="progress"></h2>'
                     + '<p>Drop files from your desktop to upload</p>')
                 .addClass('well');
+            return this;
         },
 
         lightUp: function() {

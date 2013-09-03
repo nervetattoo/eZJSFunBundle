@@ -1,4 +1,4 @@
-define(['ez/content/objects', 'models/image', 'file'], function(Collection, Model, File) {
+define(['ez/content/objects', 'models/image'], function(Collection, Model) {
     return Collection.extend({
         model: Model,
         initialize: function() {

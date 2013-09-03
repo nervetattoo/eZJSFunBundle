@@ -1,10 +1,10 @@
 requirejs.config({
-    baseUrl: '/bundles/ezjsfun/js',
+    baseUrl: '/bundles/ezjsfun/js/app',
     urlArgs: 'bust=' + Date.now()
 });
 
 
-require(['backbone', 'app', 'jquery', 'ez/config'], function(Backbone, App, $, Ez) {
+require(['backbone', 'views/app', 'jquery', 'ez/config'], function(Backbone, AppView, $, Ez) {
     // Backbone.ez configuration
     Ez.set({
         username: 'admin',
@@ -14,7 +14,7 @@ require(['backbone', 'app', 'jquery', 'ez/config'], function(Backbone, App, $, E
             return this.get('prefix') + partial;
         }
     });
-    new App({
+    new AppView({
         el: $('#app-container')
     }).render();
     Backbone.history.start();

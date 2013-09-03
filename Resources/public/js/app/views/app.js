@@ -1,26 +1,27 @@
-define(['jquery', 'backbone', 'collections/images', 'dropzone'],
+define(['jquery', 'backbone', 'collections/images', './dropzone'],
     function($, Backbone, ImageCollection, Dropzone) {
     return Backbone.View.extend({
         views: null,
-        images: null,
 
         initialize: function() {
-            this.$el.html('<h1>Galleries</h1><div id="dropzone"></div>');
+            this.$el.html('<h1>Dropzone</h1><div id="dropzone"></div>');
             this.$dropzone = this.$('#dropzone');
 
-            this.images = new ImageCollection();
-            this.listenTo(this.images, 'add', this.renderImage);
-            this.listenTo(this.images, 'add', this.uploadImage);
+            var imageCollection = new ImageCollection();
+            this.listenTo(imageCollection, 'add', this.renderImage);
+            this.listenTo(imageCollection, 'add', this.uploadImage);
 
             this.views = {};
             this.views.dropzone = new Dropzone({
-                collection: this.images,
+                collection: imageCollection,
                 el: this.$dropzone
             });
         },
 
         render: function() {
-            this.views.dropzone.render();
+            if (this.views) {
+                _.invoke(this.views, 'render');
+            }
             return this;
         },
 

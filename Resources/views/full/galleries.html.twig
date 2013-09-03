@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-<!--[if lt IE 9 ]><html class="unsupported-ie ie" lang=""><![endif]-->
-<!--[if IE 9 ]><html class="ie ie9" lang=""><![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang=""><!--<![endif]-->
+<html>
 <head>
-    {# TODO: this probably won't be needed anymore as we will relay on the HTTP cache #}
     {% include 'eZDemoBundle::page_head_displaystyles.html.twig' %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     {% include 'eZDemoBundle::page_head.html.twig' %}
@@ -17,9 +14,7 @@
 
     <script src="{{asset('bundles/ezjsfun/js/libs/requirejs/require.js')}}"></script>
     <script src="{{asset('bundles/ezjsfun/js/config.js')}}"></script>
-    <script>
-    require(['main']);
-    </script>
+    <script>require(['main']);</script>
 
 {#
     <script src="{{asset('bundles/ezjsfun/js/libs/jquery/jquery.js')}}"></script>
@@ -28,21 +23,11 @@
 </head>
 <body>
 <!-- Complete page area: START -->
-<div id="page" class="">
+<div id="page">
     <div class="navbar main-navi">
-        <!-- Top menu area: START -->
         {% block topMenu %}
             {{ render( controller( "eZDemoBundle:Demo:topMenu", {'locationId': 2, 'excludeContentTypes': [ 'article' ]} ), {'strategy': 'esi'} ) }}
         {% endblock %}
-        <!-- Top menu area: END -->
-        {# TODO: implement logic to control path visibility #}
-        <!-- Path area: START -->
-        {% if pageData is defined and pageData.showPath %}
-            {% block path %}
-                {% include 'eZDemoBundle::page_toppath.html.twig' %}
-            {% endblock %}
-        {% endif %}
-        <!-- Path area: END -->
     </div>
     <div class="container" id="app-container">
     </div>

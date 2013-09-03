@@ -1,5 +1,5 @@
-define(['ez/content/object', 'ez/config', 'create', 'base64'],
-    function(Model, Ez, create, Base64) {
+define(['ez/content/object', 'ez/config', 'create'],
+    function(Model, Ez, create) {
     return Model.extend({
         initialize: function() {
             _.bindAll(this);
