@@ -8,18 +8,7 @@ define(['underscore', 'backbone', 'models/file'], function(_, Backbone, File) {
 
         dropped: function(e) {
             e.preventDefault();
-            var files = e.originalEvent.dataTransfer.files;
-            _.chain(files)
-                .filter(function(file) {
-                    return file.name.match(/\.(jpg|png|gif)$/);
-                })
-                .each(function(file) {
-                    var fileModel = new File(file);
-                    fileModel.on({
-                        done: _.bind(this.fileRead, this),
-                        progress: _.bind(this.fileProgress, this)
-                    }).process();
-                }, this);
+            // FIXME
             return false;
         },
 

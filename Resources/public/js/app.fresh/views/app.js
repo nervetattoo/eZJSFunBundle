@@ -8,35 +8,18 @@ define(['jquery', 'backbone', 'collections/images', './dropzone'],
             this.$dropzone = this.$('#dropzone');
 
             var imageCollection = new ImageCollection();
-            this.listenTo(imageCollection, 'add', this.renderImage);
-            this.listenTo(imageCollection, 'add', this.uploadImage);
+            // FIXME
 
-            this.views = {};
-            this.views.dropzone = new Dropzone({
-                collection: imageCollection,
-                el: this.$dropzone
-            });
+            // FIXME Subview
         },
 
         render: function() {
-            if (this.views) {
-                _.invoke(this.views, 'render');
-            }
+            // FIXME
             return this;
         },
 
         renderImage: function(model) {
-            var img = new Image();
-            img.id = model.cid;
-            img.src = window.URL.createObjectURL(model.get('file').file);
-            img.onload = function() {
-                window.URL.revokeObjectURL(img.src);
-            };
-            this.$dropzone.append(img);
-        },
-
-        uploadImage: function(model) {
-            model.upload();
+            // FIXME
         }
     });
 });
