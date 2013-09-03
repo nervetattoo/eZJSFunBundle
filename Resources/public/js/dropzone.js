@@ -1,4 +1,4 @@
-define(['underscore', 'backbone'], function(_, Backbone) {
+define(['underscore', 'backbone', 'file'], function(_, Backbone, File) {
     return Backbone.View.extend({
         events: {
             dragover: 'lightUp',
@@ -10,9 +10,20 @@ define(['underscore', 'backbone'], function(_, Backbone) {
             e.preventDefault();
             var files = e.originalEvent.dataTransfer.files;
             _.each(files, function(file) {
-                this.collection.uploadFile(file);
+                var fileModel = new File(file);
+                fileModel.on('done', _.bind(this.fileRead, this));
+                fileModel.process();
             }, this);
             return false;
+        },
+
+        // Once file is read into browser memory
+        // turn it into an image
+        fileRead: function(file, blob) {
+            this.collection.add({
+                file: file,
+                blob: blob
+            });
         },
 
         render: function() {

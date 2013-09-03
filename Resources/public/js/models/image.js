@@ -5,19 +5,14 @@ define(['ez/content/object', 'ez/config', 'create', 'base64'],
             _.bindAll(this);
         },
 
-        fileRead: function(blob, file) {
-            this.file = file;
-            this.trigger('ready', this, file, blob);
-            this.upload(file, blob);
-        },
-
-        upload: function(file, blob) {
-            this.field('name', file.name);
+        upload: function() {
+            var file = this.get('file');
+            this.field('name', file.get('name'));
             this.field('image', {
-                fileName: file.name,
-                alternativeText: file.name,
-                fileSize: file.size,
-                data: window.btoa(blob)
+                fileName: file.get('name'),
+                alternativeText: file.get('name'),
+                fileSize: file.get('size'),
+                data: window.btoa(this.get('blob'))
             });
             var data = create.content({
                 ContentType: {_href: Ez.get('_href', '/content/types/27')},
