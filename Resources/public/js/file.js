@@ -9,15 +9,26 @@ define(['backbone'], function(Backbone) {
                 size: file.size
             });
             this.reader = new FileReader();
-            this.reader.onloadend = _.bind(this.onLoaded, this);
+            this.reader.onloadend = this.onLoaded;
+            this.reader.onprogress = this.onProgress;
         },
 
         onLoaded: function(e) {
-            this.trigger('done', this, e.target.result);
+            this.trigger('done', e, this, e.target.result);
         },
 
-        process: function() {
-            this.reader.readAsBinaryString(this.file);
+        onProgress: function(e) {
+            var percent = parseInt((e.loaded / e.total) * 100, 10);
+            this.trigger('progress', e, this, percent);
+        },
+
+        process: function(type) {
+            type = 'binary';
+            var types = {
+                binary: 'readAsBinaryString'
+            };
+            var method = types[type];
+            this.reader[method](this.file);
         }
     });
 });

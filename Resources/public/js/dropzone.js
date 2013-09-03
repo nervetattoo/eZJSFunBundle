@@ -9,27 +9,38 @@ define(['underscore', 'backbone', 'file'], function(_, Backbone, File) {
         dropped: function(e) {
             e.preventDefault();
             var files = e.originalEvent.dataTransfer.files;
-            _.each(files, function(file) {
-                var fileModel = new File(file);
-                fileModel.on('done', _.bind(this.fileRead, this));
-                fileModel.process();
-            }, this);
+            _.chain(files)
+                .filter(function(file) {
+                    return file.name.match(/\.(jpg|png|gif)$/);
+                })
+                .each(function(file) {
+                    var fileModel = new File(file);
+                    fileModel.on({
+                        done: _.bind(this.fileRead, this),
+                        progress: _.bind(this.fileProgress, this)
+                    }).process();
+                }, this);
             return false;
         },
 
         // Once file is read into browser memory
         // turn it into an image
-        fileRead: function(file, blob) {
+        fileRead: function(e, file, blob) {
             this.collection.add({
                 file: file,
                 blob: blob
             });
         },
 
+        fileProgress: function(e, file, percent) {
+            this.$('.progress').text(percent + '%');
+        },
+
         render: function() {
             this.$el
-                .addClass('well')
-                .text('Drop files from your desktop to upload');
+                .html('<h2 class="progress"></h2>'
+                    + '<p>Drop files from your desktop to upload</p>')
+                .addClass('well');
         },
 
         lightUp: function() {
