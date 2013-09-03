@@ -16,3 +16,5 @@ app/config/parameters.yml
 Resources/public/js/libs/
 
 *.swp
+
+node_modules

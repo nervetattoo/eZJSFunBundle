@@ -1,4 +1,5 @@
-define(['ez/content/object', 'ez/config', 'create'], function(Model, Ez, create) {
+define(['ez/content/object', 'ez/config', 'create', 'base64'],
+    function(Model, Ez, create, Base64) {
     return Model.extend({
         initialize: function() {
             _.bindAll(this);
@@ -14,6 +15,7 @@ define(['ez/content/object', 'ez/config', 'create'], function(Model, Ez, create)
             this.field('name', file.name);
             this.field('image', {
                 fileName: file.name,
+                alternativeText: file.name,
                 fileSize: file.size,
                 data: window.btoa(blob)
             });

@@ -15,8 +15,11 @@
         }
     </style>
 
-    <script src="{{asset('bundles/ezjsfun/js/libs/requirejs/require.js')}}"
-        data-main="{{asset('bundles/ezjsfun/js/')}}/main"></script>
+    <script src="{{asset('bundles/ezjsfun/js/libs/requirejs/require.js')}}"></script>
+    <script src="{{asset('bundles/ezjsfun/js/config.js')}}"></script>
+    <script>
+    require(['main.dist']);
+    </script>
 </head>
 <body>
 <!-- Complete page area: START -->
